@@ -315,6 +315,7 @@ public class DateUtilsTests {
         }
     }
     
+    @Test
     public void testFormatWeekOfYear() {
         String week = DateUtils.format(DateFields.of(2018, 4, 1, 10, 20, 30, 400), "%W");
         assertEquals("13", week);
