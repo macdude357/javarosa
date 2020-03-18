@@ -130,66 +130,63 @@ public class DateUtilsTests {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
         Calendar startOfDay = Calendar.getInstance();
+        startOfDay.set(Calendar.HOUR_OF_DAY, 0);
         startOfDay.set(Calendar.MINUTE, 0);
         startOfDay.set(Calendar.SECOND, 0);
         startOfDay.set(Calendar.MILLISECOND, 0);
-        
-        int currentHour = startOfDay.get(Calendar.HOUR_OF_DAY);
-        
-        int hourDelta = 10 - currentHour;
 
         long startOfDayDate = startOfDay.getTime().getTime();
 
-        testTime("10:00", startOfDayDate + 1000 * 60 * 60 * hourDelta - getOffset());
-        testTime("10:00Z", startOfDayDate + 1000 * 60 * 60 * hourDelta);
+        testTime("10:00", startOfDayDate + 1000 * 60 * 60 * 10 - getOffset());
+        testTime("10:00Z", startOfDayDate + 1000 * 60 * 60 * 10);
 
-        testTime("10:00+02", startOfDayDate + 1000 * 60 * 60 * (hourDelta - 2));
-        testTime("10:00-02", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 2));
+        testTime("10:00+02", startOfDayDate + 1000 * 60 * 60 * 8);
+        testTime("10:00-02", startOfDayDate + 1000 * 60 * 60 * 12);
 
-        testTime("10:00+02:30", startOfDayDate + 1000 * 60 * (60 * hourDelta - 150));
-        testTime("10:00-02:30", startOfDayDate + 1000 * 60 * (60 * hourDelta + 150));
+        testTime("10:00+02:30", startOfDayDate + 1000 * 60 * (60 * 10 - 150));
+        testTime("10:00-02:30", startOfDayDate + 1000 * 60 * (60 * 10 + 150));
 
         TimeZone offsetTwoHours = TimeZone.getTimeZone("GMT+02");
 
         TimeZone.setDefault(offsetTwoHours);
 
-        testTime("10:00", startOfDayDate + 1000 * 60 * 60 * hourDelta - getOffset());
-        testTime("10:00Z", startOfDayDate + 1000 * 60 * 60 * hourDelta);
+        testTime("10:00", startOfDayDate + 1000 * 60 * 60 * 10 - getOffset());
+        testTime("10:00Z", startOfDayDate + 1000 * 60 * 60 * 10);
 
-        testTime("10:00+02", startOfDayDate + 1000 * 60 * 60 * (hourDelta -2));
-        testTime("10:00-02", startOfDayDate + 1000 * 60 * 60 * (hourDelta +2));
+        testTime("10:00+02", startOfDayDate + 1000 * 60 * 60 * 8);
+        testTime("10:00-02", startOfDayDate + 1000 * 60 * 60 * 12);
 
-        testTime("10:00+02:30", startOfDayDate + 1000 * 60 * (60 * hourDelta - 150));
-        testTime("10:00-02:30", startOfDayDate + 1000 * 60 * (60 * hourDelta + 150));
+        testTime("10:00+02:30", startOfDayDate + 1000 * 60 * (60 * 10 - 150));
+        testTime("10:00-02:30", startOfDayDate + 1000 * 60 * (60 * 10 + 150));
 
         TimeZone offsetMinusTwoHours = TimeZone.getTimeZone("GMT-02");
 
         TimeZone.setDefault(offsetMinusTwoHours);
 
-        testTime("14:00", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 4) - getOffset());
-        testTime("14:00Z", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 4));
+        testTime("14:00", startOfDayDate + 1000 * 60 * 60 * 14 - getOffset());
+        testTime("14:00Z", startOfDayDate + 1000 * 60 * 60 * 14);
 
-        testTime("14:00+02", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 2));
-        testTime("14:00-02", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 6));
+        testTime("14:00+02", startOfDayDate + 1000 * 60 * 60 * 12);
+        testTime("14:00-02", startOfDayDate + 1000 * 60 * 60 * 16);
 
-        testTime("14:00+02:30", startOfDayDate + 1000 * 60 * (60 * (hourDelta + 4) - 150));
-        testTime("14:00-02:30", startOfDayDate + 1000 * 60 * (60 * (hourDelta + 4) + 150));
+        testTime("14:00+02:30", startOfDayDate + 1000 * 60 * (60 * 14 - 150));
+        testTime("14:00-02:30", startOfDayDate + 1000 * 60 * (60 * 14 + 150));
 
 
         TimeZone offsetPlusHalf = TimeZone.getTimeZone("GMT+0230");
 
         TimeZone.setDefault(offsetPlusHalf);
 
-        testTime("14:00", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 4) - getOffset());
-        testTime("14:00Z", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 4));
+        testTime("14:00", startOfDayDate + 1000 * 60 * 60 * 14 - getOffset());
+        testTime("14:00Z", startOfDayDate + 1000 * 60 * 60 * 14);
 
-        testTime("14:00+02", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 2));
-        testTime("14:00-02", startOfDayDate + 1000 * 60 * 60 * (hourDelta + 6));
+        testTime("14:00+02", startOfDayDate + 1000 * 60 * 60 * 12);
+        testTime("14:00-02", startOfDayDate + 1000 * 60 * 60 * 16);
 
-        testTime("14:00+02:30", startOfDayDate + 1000 * 60 * (60 * (hourDelta + 4) - 150));
-        testTime("14:00-02:30", startOfDayDate + 1000 * 60 * (60 * (hourDelta + 4) + 150));
+        testTime("14:00+02:30", startOfDayDate + 1000 * 60 * (60 * 14 - 150));
+        testTime("14:00-02:30", startOfDayDate + 1000 * 60 * (60 * 14 + 150));
 
-        testTime("14:00+04:00", startOfDayDate + 1000 * 60 * 60 * hourDelta);
+        testTime("14:00+04:00", startOfDayDate + 1000 * 60 * 60 * 10);
     }
 
     private void testTime(String in, long test) {
@@ -311,7 +308,6 @@ public class DateUtilsTests {
             // 2018-04-01 was sunday
             String day = DateUtils.format(DateFields.of(2018, 4, 1, 10, 20, 30, 400), "%a");
             assertEquals(ljs.sunday, day);
-            
         }
     }
     
@@ -329,4 +325,5 @@ public class DateUtilsTests {
         assertEquals("52", week);
        
     }
+    
 }
